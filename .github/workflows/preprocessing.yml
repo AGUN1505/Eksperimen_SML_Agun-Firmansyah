@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'heart.csv'
+      - 'preprocessing/heart.csv'
       - 'preprocessing/automate_Agun-Firmansyah.py'
   workflow_dispatch:
     inputs:
@@ -13,6 +13,9 @@ on:
         description: 'Alasan menjalankan workflow secara manual'
         required: false
         default: 'Manual trigger'
+
+permissions:
+  contents: write
 
 jobs:
   preprocessing:
