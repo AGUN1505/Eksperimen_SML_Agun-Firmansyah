@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'preprocessing/heart.csv'
+      - 'heart.csv'
       - 'preprocessing/automate_Agun-Firmansyah.py'
   workflow_dispatch:
     inputs:
