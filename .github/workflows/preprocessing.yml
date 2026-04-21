@@ -1,0 +1,87 @@
+name: Automated Preprocessing Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'heart.csv'
+      - 'preprocessing/automate_Agun-Firmansyah.py'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Alasan menjalankan workflow secara manual'
+        required: false
+        default: 'Manual trigger'
+
+jobs:
+  preprocessing:
+    name: Run Data Preprocessing
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Checkout repository ──────────────────────────────
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # ── 2. Setup Python ─────────────────────────────────────
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      # ── 3. Install dependencies ─────────────────────────────
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy scikit-learn
+
+      # ── 4. Jalankan preprocessing ───────────────────────────
+      - name: Run Preprocessing Script
+        run: |
+          python preprocessing/automate_Agun-Firmansyah.py \
+            --input heart.csv \
+            --output preprocessing/heart-disease_preprocessing.csv
+
+      # ── 5. Validasi output ──────────────────────────────────
+      - name: Validate Output
+        run: |
+          python - <<'EOF'
+          import pandas as pd
+          import sys
+
+          path = 'preprocessing/heart-disease_preprocessing.csv'
+          try:
+              df = pd.read_csv(path)
+              print(f"✅ File output ditemukan: {path}")
+              print(f"   Shape   : {df.shape}")
+              print(f"   Kolom   : {list(df.columns)}")
+              print(f"   Missing : {df.isnull().sum().sum()}")
+              if df.isnull().sum().sum() > 0:
+                  print("❌ Masih ada missing values!")
+                  sys.exit(1)
+              print("✅ Validasi berhasil — dataset siap dilatih!")
+          except FileNotFoundError:
+              print(f"❌ File output tidak ditemukan: {path}")
+              sys.exit(1)
+          EOF
+
+      # ── 6. Commit & push hasil preprocessing ────────────────
+      - name: Commit Preprocessing Result
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add preprocessing/heart-disease_preprocessing.csv
+          git diff --staged --quiet || git commit -m "ci: update preprocessed dataset [skip ci]"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── 7. Upload artifact ───────────────────────────────────
+      - name: Upload Preprocessed Dataset as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: heart-disease_preprocessing
+          path: preprocessing/heart-disease_preprocessing.csv
+          retention-days: 30
