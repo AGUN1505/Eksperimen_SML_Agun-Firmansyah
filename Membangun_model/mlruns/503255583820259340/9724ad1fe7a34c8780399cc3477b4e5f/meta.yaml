@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/Eksperimen_SML_Agun-Firmansyah/Membangun_model/mlruns/503255583820259340/9724ad1fe7a34c8780399cc3477b4e5f/artifacts
+end_time: 1776784419784
+entry_point_name: ''
+experiment_id: '503255583820259340'
+lifecycle_stage: active
+run_id: 9724ad1fe7a34c8780399cc3477b4e5f
+run_name: RandomForest-Autolog
+run_uuid: 9724ad1fe7a34c8780399cc3477b4e5f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1776784396201
+status: 3
+tags: []
+user_id: Owner

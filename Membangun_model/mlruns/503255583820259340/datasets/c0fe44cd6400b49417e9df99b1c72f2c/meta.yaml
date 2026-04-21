@@ -1,0 +1,22 @@
+digest: f3d3137e
+name: dataset
+profile: '{"num_rows": 61, "num_elements": 1403}'
+schema: '{"mlflow_colspec": [{"type": "double", "name": "age", "required": true},
+  {"type": "long", "name": "sex", "required": true}, {"type": "double", "name": "trestbps",
+  "required": true}, {"type": "double", "name": "chol", "required": true}, {"type":
+  "long", "name": "fbs", "required": true}, {"type": "double", "name": "thalach",
+  "required": true}, {"type": "long", "name": "exang", "required": true}, {"type":
+  "double", "name": "oldpeak", "required": true}, {"type": "long", "name": "ca", "required":
+  true}, {"type": "boolean", "name": "cp_0", "required": true}, {"type": "boolean",
+  "name": "cp_1", "required": true}, {"type": "boolean", "name": "cp_2", "required":
+  true}, {"type": "boolean", "name": "cp_3", "required": true}, {"type": "boolean",
+  "name": "restecg_0", "required": true}, {"type": "boolean", "name": "restecg_1",
+  "required": true}, {"type": "boolean", "name": "restecg_2", "required": true}, {"type":
+  "boolean", "name": "slope_0", "required": true}, {"type": "boolean", "name": "slope_1",
+  "required": true}, {"type": "boolean", "name": "slope_2", "required": true}, {"type":
+  "boolean", "name": "thal_0", "required": true}, {"type": "boolean", "name": "thal_1",
+  "required": true}, {"type": "boolean", "name": "thal_2", "required": true}, {"type":
+  "boolean", "name": "thal_3", "required": true}]}'
+source: '{"tags": {"mlflow.user": "Owner", "mlflow.source.name": "modelling.py", "mlflow.source.type":
+  "LOCAL", "mlflow.source.git.commit": "4c89c75df94c85f1f8e617a2f78764999cf06d48"}}'
+source_type: code
